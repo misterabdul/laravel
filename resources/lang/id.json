@@ -1,0 +1,9 @@
+{
+    "Unauthorized": "Tidak Terotorisasi",
+    "Forbidden": "Terlarang",
+    "Not Found": "Tidak Ditemukan",
+    "Page Expired": "Halaman Kadaluarsa",
+    "Too Many Requests" : "Terlalu Banyak Permintaan",
+    "Server Error": "Kesalahan Server",
+    "Service Unavailable": "Layanan Tidak Tersedia"
+}

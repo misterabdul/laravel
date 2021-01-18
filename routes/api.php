@@ -1,18 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Api;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::any('ping', RPC\PingController::class);
+
+    Route::middleware('guest')->group(function () {
+        Route::post('signup', RPC\SignUpController::class);
+    });
+    Route::middleware('auth:api')->group(function () {
+        Route::get('me', RPC\MeController::class);
+        Route::put('me', RPC\UpdateMeController::class);
+        Route::patch('me', RPC\UpdateMeController::class);
+        Route::apiResource('user', Rest\UserController::class)
+            ->only('index', 'show');
+    });
 });
