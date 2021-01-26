@@ -1,4 +1,6 @@
-FROM misterabdul/alpine-lamp:1.0.0-php-only
+FROM misterabdul/alpine-supervisor:1.0.0-nginx-php
+
+RUN sed -i 's/;clear_env = no/clear_env = no/g' /etc/php8/php-fpm.d/www.conf
 
 ENV APP_NAME=Laravel \
     APP_ENV=local \
@@ -42,15 +44,10 @@ ENV APP_NAME=Laravel \
     MIX_PUSHER_APP_KEY='' \
     MIX_PUSHER_APP_CLUSTER=''
 
-WORKDIR /var/www/localhost
+COPY . /app/laravel
+RUN rm -rf /app/www && \
+    ln -s /app/laravel/public /app/www && \
+    chown -R nginx:nginx /app/laravel/storage
 
-COPY --chown=apache:apache . /var/www/localhost/laravel
-
-RUN rm -rf /var/www/localhost/htdocs
-RUN ln -s /var/www/localhost/laravel/public /var/www/localhost/htdocs
-
-WORKDIR /var/www/localhost/laravel
-
-RUN composer install
-
-EXPOSE 80
+WORKDIR /app/laravel
+RUN composer install --no-dev

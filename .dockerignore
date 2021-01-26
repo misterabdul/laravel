@@ -21,6 +21,7 @@
 /storage/logs/*
 /vendor
 
+.dockerignore
 .editorconfig
 .env
 .env.backup
@@ -32,9 +33,11 @@
 CHANGE
 composer.lock
 docker-compose.yml
+Dockerfile
 Homestead.json
 Homestead.yaml
 npm-debug.log
 package-lock.json
+phpunit.xml
 README.md
 yarn-error.log
