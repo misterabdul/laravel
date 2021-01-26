@@ -1,7 +1,5 @@
 FROM misterabdul/alpine-supervisor:1.0.0-nginx-php
 
-RUN sed -i 's/;clear_env = no/clear_env = no/g' /etc/php8/php-fpm.d/www.conf
-
 ENV APP_NAME=Laravel \
     APP_ENV=local \
     APP_KEY='' \
