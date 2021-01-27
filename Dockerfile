@@ -45,7 +45,8 @@ ENV APP_NAME=Laravel \
 COPY . /app/laravel
 RUN rm -rf /app/www && \
     ln -s /app/laravel/public /app/www && \
-    chown -R nginx:nginx /app/laravel/storage
+    chown -R nginx:nginx /app/laravel/storage && \
+    echo "* * * * * php /app/laravel/artisan schedule:run >> /dev/null 2>&1" >> /var/spool/cron/crontabs/root
 
 COPY queue-worker.conf /etc/supervisor.d
 
