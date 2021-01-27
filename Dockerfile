@@ -47,5 +47,7 @@ RUN rm -rf /app/www && \
     ln -s /app/laravel/public /app/www && \
     chown -R nginx:nginx /app/laravel/storage
 
+COPY queue-worker.conf /etc/supervisor.d
+
 WORKDIR /app/laravel
 RUN composer install --no-dev

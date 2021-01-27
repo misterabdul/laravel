@@ -49,9 +49,7 @@ services:
     ports:
       - "5000:80"
     volumes:
-      - laravel-app-storage:/var/www/localhost/laravel/storage
-    stdin_open: true
-    tty: true
+      - laravel-app-storage:/app/laravel/storage
 
 networks:
   default:
